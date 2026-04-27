@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>113403547 張茗崴</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- 基礎頁面樣式 --- */
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #f4f7f6;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .card-container {
+            background-color: white;
+            width: 500px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-header {
+            background-color: #f6f6f6; /* 設計稿 header bg color */
+            padding: 10px 20px;
+            display: flex;
+            justify-content: flex-end; /* 讓按鈕靠右 */
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        /* --- 按鈕實作：完全依照標示文件 (UI Spec) --- */
+        .info-btn {
+            height: 22px;                 /* size: h22 */
+            border-radius: 8px;           /* size: R8 */
+            background-color: #ffffff;    /* background #ffffff */
+            border: 1px solid #2f2f2f;    /* outline 1px #2f2f2f (CSS 用 border 實作) */
+            
+            font-family: 'Roboto', sans-serif;
+            font-size: 13px;              /* Roboto Regular 13px */
+            font-weight: 400;             /* Regular */
+            color: #2f2f2f;               /* Color: #2f2f2f */
+            
+            padding: 0 15px;              /* 稍微給一點左右內邊距，避免字貼齊邊框 */
+            cursor: pointer;
+            outline: none;
+            transition: background-color 0.2s; /* 滑鼠懸停效果過場 */
+        }
+
+        .info-btn:hover {
+            background-color: #e8f3ff;    /* 滑鼠懸停顏色 (參考圖片 select color) */
+        }
+
+        /* --- 圖片與詳細資訊區塊 --- */
+        .card-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* 圖片和資訊之間的間距 */
+        }
+
+        .image-area {
+            display: flex;
+            justify-content: center;
+        }
+
+        .image-area img {
+            width: 450px;                 /* Default 450x240 */
+            height: 240px;
+            display: block;
+            border-radius: 4px;
+            background-color: #f0f0f0;    /* 圖片載入前的預設背景 */
+        }
+
+        .details-section {
+            display: flex;
+            flex-direction: column;
+            border-top: 1px solid #eaeaec; /* 上方分隔線顏色 @eaeaec */
+        }
+
+        .detail-row {
+            padding: 8px 10px;
+            font-size: 13px;
+            color: #707070;
+            background-color: #ffffff;
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+        
+        /* 綠色底色 highlight 部分的底色修正 */
+        .detail-row.highlight {
+            background-color: #d1f3d1; /* highlight color #d1f3d1 */
+            color: #333;
+        }
+
+        .detail-path {
+            color: #0084ff; /* 模擬圖片右下角的路徑強調色 (示意用) */
+        }
+        
+        .divider-char {
+            color: #eaeaec; /* @eaeaec dividers around paths */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-container">
+        <div class="card-header">
+            <button class="info-btn">顯示資訊</button>
+        </div>
+
+        <div class="card-body">
+            <div class="image-area">
+                <img id="randomImage" alt="預覽圖">
+            </div>
+
+            <div class="details-section">
+                <div class="detail-row highlight">修改日期：2017/10/12</div>
+                <div class="detail-row highlight">類型：JPG</div>
+                <div class="detail-row highlight">大小：466.92KB</div>
+                <div class="detail-row highlight">
+                    路徑：<span class="detail-path">V:<span class="divider-char">/</span>designcenter.qnap.com<span class="divider-char">/</span>wt<span class="divider-char">/</span>DesignCenter...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            const imageElement = document.getElementById('randomImage');
+            
+            // picsum.photos 是一個提供隨機真實圖片的服務。
+            // 每次打開網頁時產生一個隨機的種子 (Seed) 附加在 URL，
+            // 這樣Picsum 就會返回不同的圖片。
+            const randomSeed = Math.floor(Math.random() * 100000); 
+            const imageUrl = `https://picsum.photos/450/240?random=${randomSeed}`;
+            
+            // 注入隨機圖片網址
+            imageElement.src = imageUrl;
+        });
+    </script>
+
+</body>
+</html>
